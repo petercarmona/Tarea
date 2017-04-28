@@ -1,7 +1,6 @@
 // Tarea.cpp: define el punto de entrada de la aplicación de consola.
 //
 
-#include "stdafx.h"
 #include "stdio.h"
 #include <conio.h>
 #include <iostream>
@@ -35,7 +34,7 @@ void pregunta3(int number) {
 		else {
 			cout << "Es impar" << endl;
 		}
-	}	
+	}
 }
 void pregunta4(int number, int expo) {
 	cout << "Ingresar la base";cin >> number;
@@ -111,31 +110,65 @@ void pregunta5(int number) {
 		}
 	}
 }
-void pregunta6(char operador, int a, int b) {
-	cout << "Escriba el operador: ";cin >> operador;
-	cout << "Escriba A: ";cin >> a;
-	cout << "Escriba B: ";cin >> b;
-	switch (operador)
-	{
-		case '+':
-			cout << a + b << endl;
-			break;
-		case '-':
-			cout << a - b << endl;
-			break;
-		case '/':
-			if (b != 0)
-				cout << a / b << endl;
-			else
-				cout << "La operacion no existe" << endl;
-			break;
-		case '*':
-			cout << a * b << endl;
-			break;
-		default:
-			cout << "Error" << endl;
-			break;
-	}
+void pregunta6() {
+    char operador;
+    int a[10]={-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
+    int b[10]={-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
+    int posA=0,posB=0;
+    int signoA = 1,signoB = 1;
+    int cont=0;
+    char segmento[50];
+	cout << "Escriba el siguiente orden: 'operador' 'numero' 'numero'"<<endl;
+	cin >> segmento;
+	for(int i=0;i<50;i++)
+    {
+        if(segmento[i]==' '){
+            cont++;cout<<" Salto ";
+            continue;
+        }
+        if(segmento[i]=='+' && cont==0){
+            operador = '+';
+        }
+        else if(segmento[i]=='-' && cont==0){
+            operador = '-';
+            }
+        else if(segmento[i]=='*' && cont==0){
+            operador = '*';
+            }
+        else if(segmento[i]=='/' && cont==0){
+            operador = '/';
+        }
+        if(cont == 1){
+             cout<<" cont 1 ";
+            if( segmento[i]>=0 && segmento[i]<=9 || segmento[i]=='-')
+            {
+
+                if(segmento[i]=='-')
+                    signoA = -1;
+                else
+                    a[posA]=int(segmento[i]);
+            }
+        }
+        if(cont == 2)
+        {
+            cout<<" cont 2 ";
+            if(segmento[i]>=0 && segmento[i]<=9 || segmento[i]=='-')
+            {
+                if(segmento[i]=='-')
+                    signoB = -1;
+                else
+                    b[posB]=int(segmento[i]);
+            }
+        }
+    }
+	for(int i=0;i<10;i++)
+    {
+        cout<<"["<<a[i]<<"]";
+    }
+    for(int i=0;i<10;i++)
+    {
+        cout<<"["<<b[i]<<"]";
+    }
 }
 void pregunta7(int &a, int &b){
 	int tmp;
@@ -169,7 +202,7 @@ int main()
 	//pregunta 7
 	int *A=&a, *B=&b;
 
-	//pregunta8(A, B);
+	pregunta6();
 	_getch();
     return 0;
 }
